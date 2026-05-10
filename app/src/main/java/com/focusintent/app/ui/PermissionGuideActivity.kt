@@ -35,6 +35,7 @@ class PermissionGuideActivity : ComponentActivity() {
             MaterialTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     PermissionGuideScreen(
+                        activity = this,
                         onRequestOverlayPermission = { requestOverlayPermission() },
                         onRequestNotificationPermission = { requestNotificationPermission() },
                         onIgnoreBatteryOptimization = { ignoreBatteryOptimization() },
@@ -46,6 +47,11 @@ class PermissionGuideActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Refresh permission status when returning from settings
     }
 
     private fun requestOverlayPermission() {
@@ -83,14 +89,24 @@ class PermissionGuideActivity : ComponentActivity() {
 
 @Composable
 fun PermissionGuideScreen(
+    activity: PermissionGuideActivity,
     onRequestOverlayPermission: () -> Unit,
     onRequestNotificationPermission: () -> Unit,
     onIgnoreBatteryOptimization: () -> Unit,
     onContinue: () -> Unit
 ) {
     val context = LocalContext.current
-    var overlayGranted by remember { mutableStateOf(hasOverlayPermission(context)) }
-    var notificationGranted by remember { mutableStateOf(hasNotificationPermission(context)) }
+    
+    // Use derivedStateOf to automatically refresh when activity resumes
+    val overlayGranted by remember {
+        derivedStateOf { hasOverlayPermission(context) }
+    }
+    val notificationGranted by remember {
+        derivedStateOf { hasNotificationPermission(context) }
+    }
+    val batteryOptIgnored by remember {
+        derivedStateOf { isIgnoringBatteryOptimization(context) }
+    }
     
     Column(
         modifier = Modifier
@@ -141,7 +157,7 @@ fun PermissionGuideScreen(
         PermissionCard(
             title = "电池优化",
             description = "建议关闭电池优化以保证后台运行",
-            isGranted = isIgnoringBatteryOptimization(context),
+            isGranted = batteryOptIgnored,
             onAction = onIgnoreBatteryOptimization
         )
         
