@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FocusIntent</string>
+    <string name="permission_guide_title">权限引导</string>
+    <string name="permission_guide_description">为确保悬浮窗常驻显示，需要开启以下权限：</string>
+    <string name="overlay_permission">悬浮窗权限</string>
+    <string name="overlay_permission_desc">允许应用在其他应用上层显示悬浮窗</string>
+    <string name="notification_permission">通知权限</string>
+    <string name="notification_permission_desc">用于显示前台服务通知（Android 13+）</string>
+    <string name="battery_optimization">电池优化</string>
+    <string name="battery_optimization_desc">建议关闭电池优化以保证后台运行</string>
+    <string name="grant_permission">授予权限</string>
+    <string name="skip">跳过</string>
+    <string name="start_focus">开始专注</string>
+    <string name="input_purpose">请输入本次使用手机的目的...</string>
+    <string name="voice_input">语音输入</string>
+    <string name="timer_mode">计时模式</string>
+    <string name="count_up">正计时</string>
+    <string name="count_down">倒计时</string>
+    <string name="duration_minutes">时长（分钟）</string>
+    <string name="pause">暂停</string>
+    <string name="resume">继续</string>
+    <string name="end">结束</string>
+    <string name="session_completed">专注完成</string>
+    <string name="session_aborted">专注中断</string>
+    <string name="overlay_service_notification_title">专注进行中</string>
+    <string name="overlay_service_notification_text">点击返回应用</string>
+    <string name="channel_name">专注服务通知</string>
+    <string name="channel_description">显示当前专注状态</string>
+</resources>
